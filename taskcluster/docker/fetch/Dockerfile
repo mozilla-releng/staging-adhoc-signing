@@ -15,8 +15,7 @@ RUN mkdir /builds && \
 WORKDIR /builds/worker
 
 RUN apt-get update && \
-    apt-get dist-upgrade && \
-    apt-get install \
+    apt-get install -y --force-yes --no-install-recommends \
       gnupg \
       bzip2 \
       git \

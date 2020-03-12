@@ -7,7 +7,7 @@ tasks:
     - $let:
           taskgraph:
               branch: taskgraph-try
-              revision: 4d46d2b369e25068cfa71f415e094723ef8e25e1
+              revision: 84e9f5b94db7d64b0c2c99d72cce06caa5247f55
           trustDomain: adhoc
       in:
           $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'

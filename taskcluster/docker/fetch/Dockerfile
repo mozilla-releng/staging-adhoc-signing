@@ -15,6 +15,7 @@ RUN mkdir /builds && \
 WORKDIR /builds/worker
 
 RUN apt-get update && \
+    apt-get dist-upgrade && \
     apt-get install \
       gnupg \
       bzip2 \

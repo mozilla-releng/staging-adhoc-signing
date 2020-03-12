@@ -14,7 +14,7 @@ RUN mkdir /builds && \
 # Declare default working folder
 WORKDIR /builds/worker
 
-RUN apt-get update \
+RUN apt-get update && \
     apt-get install \
       gnupg \
       bzip2 \

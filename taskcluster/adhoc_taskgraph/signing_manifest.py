@@ -61,7 +61,7 @@ def get_manifest():
     all_manifests = []
     for path in manifest_paths:
         rw_manifest = yaml.load_yaml(path)
-        rw_manifest["manifest_name"] = os.path.basename(path)
+        rw_manifest["manifest_name"] = os.path.basename(path).replace(".yml", "")
         validate_schema(base_schema, deepcopy(rw_manifest), "Invalid manifest:")
         check_manifest(deepcopy(rw_manifest))
         all_manifests.append(ReadOnlyDict(rw_manifest))

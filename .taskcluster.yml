@@ -6,8 +6,8 @@ policy:
 tasks:
     - $let:
           taskgraph:
-              branch: taskgraph
-              revision: a9a010487bf10fca6dc34ba53f40d34a8ab51fc0
+              branch: taskgraph-try
+              revision: ff73d4bb5f21185905e8c00da548b38509aa3fdd
           trustDomain: adhoc
       in:
           $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'

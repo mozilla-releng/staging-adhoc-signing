@@ -45,10 +45,11 @@ def build_signing_task(config, tasks):
     for task in tasks:
         dep = task["primary-dependency"]
         task["dependencies"] = {"fetch": dep.label}
-        if not dep.task["payload"]["env"]["ARTIFACT_PREFIX"].startswith("public"):
+        artifact_prefix = task["attributes"].get("artifact_prefix", "public")
+        if not artifact_prefix.startswith("public"):
             scopes = task.setdefault('scopes', [])
             scopes.append(
-                "queue:get-artifact:{}/*".format(dep.task["payload"]["env"]["ARTIFACT_PREFIX"].rstrip('/'))
+                "queue:get-artifact:{}/*".format(artifact_prefix.rstrip('/'))
             )
         # TODO match fetch task to manifest
 #        format = evaluate_keyed_by(

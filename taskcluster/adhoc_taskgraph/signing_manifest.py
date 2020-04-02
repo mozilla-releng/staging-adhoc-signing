@@ -59,11 +59,13 @@ def check_manifest(manifest):
 @memoize
 def get_manifest():
     manifest_paths = glob.glob(os.path.join(MANIFEST_DIR, "*.yml"))
-    all_manifests = []
+    all_manifests = {}
     for path in manifest_paths:
         rw_manifest = yaml.load_yaml(path)
-        rw_manifest["manifest_name"] = os.path.basename(path).replace(".yml", "")
+        manifest_name = os.path.basename(path).replace(".yml", "")
+        rw_manifest["manifest_name"] = manifest_name
         validate_schema(base_schema, deepcopy(rw_manifest), "Invalid manifest:")
         check_manifest(deepcopy(rw_manifest))
-        all_manifests.append(ReadOnlyDict(rw_manifest))
-    return tuple(all_manifests)
+        assert manifest_name not in all_manifests
+        all_manifests[manifest_name] = rw_manifest
+    return ReadOnlyDict(all_manifests)

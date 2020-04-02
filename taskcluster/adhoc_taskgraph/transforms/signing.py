@@ -11,7 +11,7 @@ from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.schema import resolve_keyed_by
 from taskgraph.util.keyed_by import evaluate_keyed_by
 
-from .signing_manifest import get_manifest
+from ..signing_manifest import get_manifest
 
 
 transforms = TransformSequence()
@@ -59,7 +59,7 @@ def build_signing_task(config, tasks):
             {
                 "taskId": {"task-reference": "<fetch>"},
                 "taskType": "build",
-                "paths": ["{}/{}".format(artifact_prefix, manifest["artifact-name"]],
+                "paths": ["{}/{}".format(artifact_prefix, manifest["artifact-name"])],
                 "formats": manifest["signing-formats"],
             }
         ]

@@ -9,7 +9,7 @@ kind-dependencies:
     - fetch
 
 transforms:
-    - adhoc.transforms.signing:transforms
+    - adhoc_taskgraph.transforms.signing:transforms
     - taskgraph.transforms.task:transforms
 
 job-template:

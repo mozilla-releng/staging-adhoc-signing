@@ -41,7 +41,7 @@ base_schema = Schema(
         Required("requestor"): basestring,
         Required("reason"): basestring,
         Optional("gpg-signature"): basestring,
-        Optional("artifact-name"): basestring,
+        Required("artifact-name"): basestring,
         Required("manifest_name"): basestring,
     }
 )
@@ -52,6 +52,7 @@ def check_manifest(manifest):
     # XXX sha256 is a valid sha256?
     # XXX url is a reachable url?
     # XXX bug exists in bugzilla?
+    # XXX formats are known and valid for artifact-name
     pass
 
 

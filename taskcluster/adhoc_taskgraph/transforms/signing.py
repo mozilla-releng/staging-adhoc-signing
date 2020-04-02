@@ -11,6 +11,8 @@ from taskgraph.transforms.base import TransformSequence
 from taskgraph.util.schema import resolve_keyed_by
 from taskgraph.util.keyed_by import evaluate_keyed_by
 
+from .signing_manifest import get_manifest
+
 
 transforms = TransformSequence()
 
@@ -41,36 +43,27 @@ def define_signing_flags(config, tasks):
 
 @transforms.add
 def build_signing_task(config, tasks):
-    # TODO get manifest
+    all_manifests = get_manifest()
     for task in tasks:
         dep = task["primary-dependency"]
         task["dependencies"] = {"fetch": dep.label}
-        artifact_prefix = task["attributes"].get("artifact_prefix", "public")
+        artifact_prefix = task["attributes"].get("artifact_prefix", "public").rstrip('/')
         if not artifact_prefix.startswith("public"):
             scopes = task.setdefault('scopes', [])
             scopes.append(
-                "queue:get-artifact:{}/*".format(artifact_prefix.rstrip('/'))
+                "queue:get-artifact:{}/*".format(artifact_prefix)
             )
-        # TODO match fetch task to manifest
-#        format = evaluate_keyed_by(
-#            config.graph_config["scriptworker"]["signing-format"],
-#            "signing-format",
-#            {
-#                "xpi-type": task["attributes"]["addon-type"],
-#                "kind": config.kind,
-#                "level": config.params["level"],
-#            }
-#        )
-#        # assert format in KNOWN_FORMATS
-#        task["worker"]["upstream-artifacts"] = [
-#            {
-#                "taskId": {"task-reference": "<fetch>"},
-#                "taskType": "build",
-#                "paths": paths,
-#                "formats": [format],
-#            }
-#        ]
-#        task.setdefault("extra", {})["xpi-name"] = dep.task["extra"]["xpi-name"]
+        manifest_name = dep.label.replace("fetch-", "")
+        manifest = all_manifests[manifest_name]
+        task["worker"]["upstream-artifacts"] = [
+            {
+                "taskId": {"task-reference": "<fetch>"},
+                "taskType": "build",
+                "paths": ["{}/{}".format(artifact_prefix, manifest["artifact-name"]],
+                "formats": manifest["signing-formats"],
+            }
+        ]
+        task.setdefault("extra", {})["manifest-name"] = manifest_name
         del task["primary-dependency"]
         yield task
 

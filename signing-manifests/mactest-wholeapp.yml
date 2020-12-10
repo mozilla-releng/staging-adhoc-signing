@@ -1,0 +1,14 @@
+---
+bug: 12345
+sha256: d304db39836842bc60f0da5fdbef4ccb9ac65d13f2df9af8e71f078d504edab1
+filesize: 14221589
+private-artifact: false
+signing-formats: ["macapp"]
+requestor: Ben Hearsum <bhearsum@mozilla.com
+reason: test mac signing
+artifact-name: mozillavpn.tar.gz
+mac-entitlements-url: https://gist.githubusercontent.com/bhearsum/5b361f5834a467dd1a731810c2126ab9/raw/c3f68a4f9f8e5fcb5af8cd27aecf9d5bbd42c8e6/gistfile1.txt
+mac-behavior: mac_notarize
+product: mozillavpn
+fetch:
+  url: https://hearsum.ca/~bhearsum/unsigned.tar.gz

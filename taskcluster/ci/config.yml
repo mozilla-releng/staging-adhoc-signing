@@ -59,7 +59,7 @@ workers:
             # people who can pick off signing requests.
             # This means that there's no security benefit
             # to separating the level 1 / level 3 workers.
-            worker-type: adhoc-3-mac-signing
+            worker-type: adhoc-signing-mac-dev
         shipit:
             provisioner: scriptworker-k8s
             implementation: scriptworker-shipit

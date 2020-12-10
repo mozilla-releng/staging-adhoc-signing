@@ -1,7 +1,7 @@
 ---
 bug: 12345
 sha256: 09ee706a9c069db4b9adf8c848959cb43d09729f674b3cc54c3d76fee039f1eb
-filesize: 14241
+filesize: 6483
 private-artifact: false
 signing-formats: ["macapp"]
 requestor: Ben Hearsum <bhearsum@mozilla.com

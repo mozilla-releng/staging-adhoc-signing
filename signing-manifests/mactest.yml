@@ -1,0 +1,14 @@
+---
+bug: 12345
+sha256: 9c90f23204e38268ad648b2e56e5c554690a692a336579b837e04fb9e649c4d5
+filesize: 1187504
+private-artifact: false
+signing-formats: ["macapp"]
+requestor: Ben Hearsum <bhearsum@mozilla.com
+reason: test mac signing
+artifact-name: wireguard.tar.gz
+mac-entitlements-url: https://gist.githubusercontent.com/bhearsum/5b361f5834a467dd1a731810c2126ab9/raw/c3f68a4f9f8e5fcb5af8cd27aecf9d5bbd42c8e6/gistfile1.txt
+mac-behavior: mac_notarize
+product: mozillavpn
+fetch:
+  url: https://hearsum.ca/~bhearsum/wireguard.tar.gz

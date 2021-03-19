@@ -1,0 +1,12 @@
+---
+bug: 666666666666
+sha256: 9feb6713f15bbba91735010b8b76b3e0db9e99c847ac59256c7b3eef254ffecf
+filesize: 21580494
+private-artifact: true
+signing-formats: ["autograph_authenticode"]
+requestor: Ben Hearsum <bhearsum@mozilla.com>
+reason: test mozilla vpn 2.0 windows internal signing
+artifact-name: internals.zip
+fetch:
+    type: static-url
+    url: https://hearsum.ca/~bhearsum/internals.zip

@@ -7,7 +7,7 @@ tasks:
     - $let:
           taskgraph:
               branch: taskgraph
-              revision: ec220e56cf107ea279d7c08706fc370374869550
+              revision: 81f2a1a09e9b0fc1b6c66fd452e065440793c175
           trustDomain: adhoc
       in:
           $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
@@ -179,10 +179,10 @@ tasks:
                                     ADHOC_HEAD_REF: '${head_branch}'
                                     ADHOC_HEAD_REV: '${head_sha}'
                                     ADHOC_REPOSITORY_TYPE: git
-                                    TASKGRAPH_BASE_REPOSITORY: https://github.com/bhearsum/taskgraph
-                                    TASKGRAPH_HEAD_REPOSITORY: https://github.com/bhearsum/taskgraph
-                                    TASKGRAPH_HEAD_REV: main
-                                    TASKGRAPH_REPOSITORY_TYPE: git
+                                    TASKGRAPH_BASE_REPOSITORY: https://hg.mozilla.org/ci/taskgraph
+                                    TASKGRAPH_HEAD_REPOSITORY: https://hg.mozilla.org/ci/${taskgraph.branch}
+                                    TASKGRAPH_HEAD_REV: '${taskgraph.revision}'
+                                    TASKGRAPH_REPOSITORY_TYPE: hg
                                     REPOSITORIES: {$json: {adhoc: "Adhoc Manifest", taskgraph: "Taskgraph"}}
                                     HG_STORE_PATH: /builds/worker/checkouts/hg-store
                                   - $if: 'tasks_for in ["github-pull-request"]'
@@ -199,7 +199,7 @@ tasks:
                               chainOfTrust: true
                           # Note: This task is built server side without the context or tooling that
                           # exist in tree so we must hard code the hash
-                          image: mozillareleases/taskgraph:decision-d9fab4448ee5e00b0a29825c3f0609af957279daf102547d715414782710ef06@sha256:79eb469838621168a6364476b96850fc9f2d353686195c010ad078fdcf29568e
+                          image: mozillareleases/taskgraph:decision-cf37a916268ac8d3fead0a9e4c8e1075328c98d65e0b93a9cfbafe7ea2d4ad83@sha256:ed00d6fa2e8265e165f0f842dba1448fee718b9cc3263cdea4f44cbe0e7b9431
                           maxRunTime: 1800
 
                           command:
@@ -215,12 +215,12 @@ tasks:
                                 in:
                                     $if: 'tasks_for == "action"'
                                     then: >
-                                        PIP_IGNORE_INSTALLED=0 pip install --user /builds/worker/checkouts/taskgraph &&
+                                        PIP_IGNORE_INSTALLED=0 pip3 install --user /builds/worker/checkouts/taskgraph &&
                                         cd /builds/worker/checkouts/src &&
                                         ln -s /builds/worker/artifacts artifacts &&
                                         ~/.local/bin/taskgraph action-callback
                                     else: >
-                                        PIP_IGNORE_INSTALLED=0 pip install --user /builds/worker/checkouts/taskgraph &&
+                                        PIP_IGNORE_INSTALLED=0 pip3 install --user /builds/worker/checkouts/taskgraph &&
                                         ln -s /builds/worker/artifacts artifacts &&
                                         ~/.local/bin/taskgraph decision
                                         --pushlog-id='0'
@@ -242,6 +242,14 @@ tasks:
                                   type: 'directory'
                                   path: '/builds/worker/artifacts'
                                   expires: {$fromNow: '1 year'}
+                              'public/docker-contexts':
+                                  type: 'directory'
+                                  path: '/builds/worker/checkouts/src/docker-contexts'
+                                  # This needs to be at least the deadline of the
+                                  # decision task + the docker-image task deadlines.
+                                  # It is set to a week to allow for some time for
+                                  # debugging, but they are not useful long-term.
+                                  expires: {$fromNow: '7 day'}
 
                       extra:
                           $merge:

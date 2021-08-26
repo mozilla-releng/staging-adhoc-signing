@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from copy import deepcopy
 import glob
@@ -41,28 +38,29 @@ SUPPORTED_SIGNING_FORMATS = (
 base_schema = Schema(
     {
         Required("bug"): int,
-        Required("sha256"): text_type,
+        Required("sha256"): str,
         Required("filesize"): int,
         Required("private-artifact"): bool,
         Required("signing-formats"): [Any(*SUPPORTED_SIGNING_FORMATS)],
-        Required("requestor"): basestring,
-        Required("reason"): basestring,
-        Required("artifact-name"): basestring,
+        Required("requestor"): str,
+        Required("reason"): str,
+        Required("artifact-name"): str,
         Required("fetch"): Any(
             {
-                Optional("gpg-signature"): basestring,
+                Optional("gpg-signature"): str,
                 Optional('type'): 'static-url',
-                Required('url'): basestring,
+                Required('url'): str,
             },
             {
                 Required('type'): 'bmo-attachment',
-                Required('attachment-id'): Any(basestring, int)
+                Required('attachment-id'): Any(str, int)
             }
         ),
-        Required("manifest_name"): basestring,
-        Optional("mac-behavior"): text_type,
-        Optional("product"): text_type,
-        Optional("mac-entitlements-url"): text_type,
+        Required("manifest_name"): str,
+        Optional("mac-behavior"): str,
+        Optional("product"): str,
+        Optional("mac-entitlements-url"): str,
+        Optional("mac-provisioning-profile"): str,
     }
 )
 

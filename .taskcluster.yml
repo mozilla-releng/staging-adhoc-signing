@@ -10,7 +10,9 @@ tasks:
               revision: 81f2a1a09e9b0fc1b6c66fd452e065440793c175
           trustDomain: adhoc
       in:
-          $if: 'tasks_for in ["github-pull-request", "github-push", "action", "cron"]'
+          $if: >
+              (tasks_for in ["github-pull-request", "action", "cron"]
+              || (tasks_for == "github-push" && event.ref in ["refs/heads/master"]))
           then:
               $let:
                   # Github events have this stuff in different places...

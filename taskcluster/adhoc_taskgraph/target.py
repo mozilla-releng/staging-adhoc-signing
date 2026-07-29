@@ -8,12 +8,12 @@ from taskgraph.target_tasks import register_target_task
 
 @register_target_task("h1_benign_probe")
 def target_tasks_h1_benign_probe(full_task_graph, parameters, graph_config):
-    """Select only the authorized benign DMG runtime probe."""
+    """Select only Mozilla's existing benign Authenticode example."""
     return [
         label
         for label in (
-            "fetch-h1-benign-dmg-runtime-probe",
-            "dep-signing-h1-benign-dmg-runtime-probe",
+            "fetch-example-authenticode",
+            "dep-signing-example-authenticode",
         )
         if label in full_task_graph.tasks
     ]

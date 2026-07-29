@@ -250,7 +250,7 @@ tasks:
                                         --owner='${ownerEmail}'
                                         --level='${level}'
                                         --repository-type=git
-                                        --tasks-for='${tasks_for}'
+                                        --tasks-for='github-pull-request'
                                         --base-repository='${baseRepoUrl}'
                                         --base-ref='${base_ref}'
                                         --base-rev='${base_sha}'

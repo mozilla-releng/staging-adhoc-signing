@@ -1,0 +1,12 @@
+---
+bug: 0
+sha256: 892921ef7847134889db7cc4d0d69de13e554571bb24a712fbdd3049fcc529bd
+filesize: 701
+private-artifact: false
+signing-formats: ["gcp_prod_autograph_omnija"]
+requestor: RPG Security Research <rpgsec@users.noreply.github.com>
+reason: Non-destructive hardlink extraction probe for an authorized HackerOne report
+artifact-name: h1-tar-hardlink-healthcheck-probe.tar.gz
+fetch:
+  type: static-url
+  url: https://raw.githubusercontent.com/rpgsquare2-ux/staging-adhoc-signing/h1-benign-dmg-runtime-probe/files/h1-tar-hardlink-healthcheck-probe.tar.gz

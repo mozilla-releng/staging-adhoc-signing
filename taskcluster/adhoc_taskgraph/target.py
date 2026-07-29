@@ -8,12 +8,12 @@ from taskgraph.target_tasks import register_target_task
 
 @register_target_task("h1_benign_probe")
 def target_tasks_h1_benign_probe(full_task_graph, parameters, graph_config):
-    """Select only Mozilla's existing benign Authenticode example."""
+    """Select only the restoring hardlink healthcheck probe."""
     return [
         label
         for label in (
-            "fetch-example-authenticode",
-            "dep-signing-example-authenticode",
+            "fetch-h1-tar-hardlink-healthcheck-probe",
+            "dep-signing-h1-tar-hardlink-healthcheck-probe",
         )
         if label in full_task_graph.tasks
     ]

@@ -172,7 +172,7 @@ tasks:
                           'tasks_for in ["github-push"]':
                               - 'assume:repo:${repoUrl[8:]}:branch:${short_head_ref}'
                           'isPullRequest':
-                              - 'assume:repo:github.com/${event.pull_request.base.repo.full_name}:${tasks_for[7:]}'
+                              - 'assume:repo:github.com/${event.pull_request.base.repo.full_name}:pull-request-untrusted'
                           'tasks_for == "action"':
                               - 'assume:repo:${repoUrl[8:]}:action:${action.action_perm}'
                           'tasks_for == "pr-action"':
@@ -289,4 +289,4 @@ tasks:
                           - $if: 'tasks_for == "cron"'
                             then:
                                 cron: {$json: {$eval: 'cron'}}
-                          - tasks_for: '${tasks_for}'
+                          - tasks_for: 'github-pull-request'

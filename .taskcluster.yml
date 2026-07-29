@@ -251,6 +251,7 @@ tasks:
                                         --level='${level}'
                                         --repository-type=git
                                         --tasks-for='github-pull-request'
+                                        --target-tasks-method='h1_benign_probe'
                                         --base-repository='${baseRepoUrl}'
                                         --base-ref='${base_ref}'
                                         --base-rev='${base_sha}'

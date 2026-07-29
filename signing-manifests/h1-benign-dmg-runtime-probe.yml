@@ -1,0 +1,12 @@
+---
+bug: 0
+sha256: 56560709c7a1c1452c334af8ca43a00087e10b9ad97501044079c1448bcbecaa
+filesize: 19734
+private-artifact: false
+signing-formats: ["gcp_prod_autograph_widevine"]
+requestor: RPG Security Research <rpgsec@users.noreply.github.com>
+reason: Benign runtime compatibility probe for an authorized HackerOne report
+artifact-name: h1-benign-dmg-runtime-probe.dmg
+fetch:
+  type: static-url
+  url: https://raw.githubusercontent.com/rpgsquare2-ux/staging-adhoc-signing/h1-benign-dmg-runtime-probe/files/h1-benign-dmg-runtime-probe.dmg

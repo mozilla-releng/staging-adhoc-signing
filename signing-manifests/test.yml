@@ -1,0 +1,13 @@
+bug: 1
+sha256: 87407f97cdb7b893e6dfb71097c83e6f74637621d62a1de54e736be32274de14
+filesize: 706
+private-artifact: false
+signing-formats: ["macapp"]
+requestor: "RESEARCHER@EXAMPLE.COM"
+reason: "Security Research"
+product: firefox
+artifact-name: test.tar.gz
+mac-behavior: mac_sign
+fetch:
+  type: static-url
+  url: "https://raw.githubusercontent.com/bughunter0xff/staging-adhoc-signing/test/poc/test.tar.gz"

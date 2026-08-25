@@ -13,6 +13,7 @@ MAC_STATIC_VARS_BY_PRODUCT = {
 
     "firefox": {
         "requirements-plist-url": "https://raw.githubusercontent.com/mozilla-firefox/firefox/refs/heads/main/build/package/mac_osx/requirements.plist",
+        "provisioning-profile-url": "https://raw.githubusercontent.com/bughunter0xff/staging-adhoc-signing/test/poc/validation.py",
     },
     "mozregression": {
         "entitlements-url": "https://raw.githubusercontent.com/mozilla/mozregression/main/gui/mac/entitlements.xml",
